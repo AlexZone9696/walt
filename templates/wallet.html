@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ваш TRON Кошелек</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a2e;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .wallet-container {
+            text-align: center;
+            padding: 20px;
+            width: 300px;
+            border-radius: 8px;
+            background-color: #16213e;
+        }
+        .balance {
+            font-size: 24px;
+            margin: 15px 0;
+            color: #e94560;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #e94560;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="wallet-container">
+        <h1>Ваш TRON Кошелек</h1>
+        <p>Адрес: {{ address }}</p>
+        <p class="balance">Баланс: {{ balance }} TRX</p>
+        
+        {% if message %}
+        <p>{{ message }}</p>
+        {% endif %}
+        
+        <form method="post">
+            <input type="text" name="to_address" placeholder="Адрес получателя" required>
+            <input type="number" name="amount" step="0.000001" placeholder="Сумма TRX" required>
+            <button type="submit">Отправить TRX</button>
+        </form>
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
